@@ -122,10 +122,10 @@ function resumen(){
   var s='<svg viewBox="0 0 300 184" role="img" aria-label="Medidor de crecimiento: '+g.l+' '+f2(g.v)+' %">'+arc(0,z,"#f3b9bf")+arc(z,1,"#e6e6e6")+
    '<line x1="'+pt(z,R-12)[0]+'" y1="'+pt(z,R-12)[1]+'" x2="'+pt(z,R+12)[0]+'" y2="'+pt(z,R+12)[1]+'" stroke="#111" stroke-width="2"/>'+
    lab(0,mn,"end")+lab(1,mx,"start")+(z>0&&z<1?lab(z,"0","middle"):"")+
-   '<circle cx="'+pp[0]+'" cy="'+pp[1]+'" r="6" fill="#fff" stroke="#111" stroke-width="2"/><g class="nd" id="nd" style="transform:rotate(-90deg)"><path d="M150 150L150 46" stroke="#d0021b" stroke-width="3.5" stroke-linecap="round"/><circle cx="150" cy="150" r="9" fill="#111"/></g></svg>';
+   '<g class="nd" id="nd" style="transform:rotate(-90deg)"><path d="M150 150L150 46" stroke="#d0021b" stroke-width="3.5" stroke-linecap="round"/></g></svg>';
   var d=g.v-g.p,h='<div class="hero"><div>'+s+'</div><div><div class="ctl" style="margin-bottom:6px"><div class="grp">'+Object.keys(GM).map(k=>pill("gm",k,GM[k].l,S.gm===k)).join("")+"</div></div>";
-  h+='<div class="big"><span class="cu" data-n="'+g.v+'" data-d="2">0</span><small> %</small></div><p style="margin:0 0 8px;font-size:15px">'+g.t+'</p><p class="pv"><svg width="12" height="12" viewBox="0 0 12 12" style="display:inline;vertical-align:-1px"><circle cx="6" cy="6" r="4.5" fill="#fff" stroke="#111" stroke-width="2"/></svg> Un año antes ('+g.pl+'): <b>'+f2(g.p)+' %</b> · diferencia: <b>'+(d>0?"+":"")+f2(d)+" pp</b></p></div></div>";
-  h+='<p class="note">La aguja marca el dato de agosto de 2026; el círculo, el del año anterior. La zona rosada es crecimiento negativo. El DANE reporta un decrecimiento de 0,04 % en la serie original: prácticamente sin variación frente a agosto de 2025.</p>';
+  h+='<div class="big"><span class="cu" data-n="'+g.v+'" data-d="2">0</span><small> %</small></div><p style="margin:0 0 8px;font-size:15px">'+g.t+'</p><p class="pv">Un año antes ('+g.pl+'): <b>'+f2(g.p)+' %</b> · diferencia: <b>'+(d>0?"+":"")+f2(d)+" pp</b></p></div></div>";
+  h+='<p class="note">La aguja marca el dato de agosto de 2026. La zona rosada es crecimiento negativo. El DANE reporta un decrecimiento de 0,04 % en la serie original: prácticamente sin variación frente a agosto de 2025.</p>';
   return h;
 }
 function needle(){
