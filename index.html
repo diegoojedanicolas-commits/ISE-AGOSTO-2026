@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ISE de agosto de 2026</title>
+<style>
+:root{--bg:#fff;--ink:#111;--muted:#6b6b6b;--line:#ececec;--red:#d0021b;--pos:#e58a93;color-scheme:light;box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;line-height:1.5}
+.wrap{max-width:760px;margin:0 auto;padding:34px 22px 48px}
+button{font:inherit;color:inherit;cursor:pointer}
+h1{border-top:4px solid var(--red);padding-top:22px;font:700 30px/1.15 Georgia,"Times New Roman",serif;margin:0 0 8px}
+h2{font:400 22px/1.2 Georgia,serif;margin:30px 0 12px}
+.sub{color:var(--muted);margin:0 0 16px;font-size:15px;max-width:62ch}
+svg{display:block;width:100%;height:auto}
+.tabs{display:flex;border-bottom:1px solid #ccc;margin:6px 0 18px;overflow-x:auto}
+.tab{background:none;border:0;border-bottom:4px solid transparent;padding:10px 14px;font-weight:700;font-size:15px;margin-bottom:-1px;white-space:nowrap}
+.tab[aria-pressed=true]{border-bottom-color:var(--red)}
+.ctl{display:flex;flex-wrap:wrap;gap:8px 20px;margin-bottom:14px;align-items:center}
+.grp{display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+.grp small{font-size:12px;color:var(--muted);margin-right:2px}
+.pill{background:#fff;border:1px solid var(--ink);border-radius:999px;padding:4px 13px;font-size:13px;display:inline-flex;align-items:center;gap:6px}
+.pill[aria-pressed=true]{background:var(--ink);color:#fff}
+.pill i{width:10px;height:10px;border-radius:50%;display:inline-block;border:1px solid #fff}
+.pill[aria-pressed=false] i{opacity:.35}
+.note{font-size:13px;color:var(--muted);margin:14px 0 0;max-width:64ch}
+.hero{display:grid;grid-template-columns:minmax(220px,330px) 1fr;gap:24px;align-items:center}
+.big{font:400 52px/1 Georgia,serif;margin:4px 0}.big small{font-size:24px}
+.nd{transform-origin:150px 150px;transition:transform 1.5s cubic-bezier(.3,1.45,.5,1)}
+.arc{fill:none;stroke-width:16}
+.gl{font-size:11px;fill:var(--muted)}
+.pv{font-size:13px;color:var(--muted)}.pv b{color:var(--ink)}
+.card{border-left:4px solid var(--red);background:#f8f8f8;padding:12px 16px;margin-bottom:14px;min-height:96px}
+.card .n{font-size:14px;font-weight:700}.card b{display:inline-block;font:400 26px/1.2 Georgia,serif;margin:2px 14px 0 0}.card span{font-size:13px;color:var(--muted)}
+.chart{position:relative}.chart svg{touch-action:pan-y}
+.ln{fill:none;stroke-width:3;stroke-linecap:round;stroke-linejoin:round}
+.tk{font-size:10px;fill:var(--muted)}
+.tip{position:absolute;top:0;pointer-events:none;background:var(--ink);color:#fff;padding:7px 10px;font-size:12px;line-height:1.5;white-space:nowrap;opacity:0;transition:opacity .12s;border-radius:4px}
+.tip.on{opacity:1}.tip i{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:6px;border:1px solid #fff}
+.rw{display:grid;grid-template-columns:minmax(120px,36%) 1fr;gap:12px;align-items:center;width:100%;background:none;border:0;padding:6px 4px;text-align:left}
+.rw:hover,.rw:focus-visible,.rw.on{background:#f6f6f6;outline:none}
+.rw .lb{font-size:13px;line-height:1.25}.rw.on .lb{font-weight:700}
+.tr{position:relative;display:block;height:16px}
+.z{position:absolute;top:-4px;bottom:-4px;width:1px;background:#bbb}
+.bar{position:absolute;top:0;height:100%;background:var(--pos);border-radius:2px;transform:scaleX(0);transform-origin:left;transition:transform .7s cubic-bezier(.2,.7,.2,1)}
+.bar.q{background:var(--ink);transform-origin:right}.go .bar{transform:scaleX(1)}.rw.on .bar{background:var(--red)}
+.v{position:absolute;top:-1px;font-size:12px;font-weight:700;white-space:nowrap;font-variant-numeric:tabular-nums}
+.wb{cursor:pointer;transform-box:fill-box;animation:gy .55s cubic-bezier(.2,.7,.2,1) both}.wb.d{transform-origin:top}.wb.u{transform-origin:bottom}
+@keyframes gy{from{transform:scaleY(0)}}
+.sc{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:0 0 22px}
+.sc div{border-top:3px solid var(--ink);padding-top:8px}
+.sc svg.ic{width:30px;height:30px;stroke:var(--ink);fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;transition:transform .3s}
+.sc div:hover .ic{transform:translateY(-3px) rotate(-4deg)}
+.sc b{display:block;font:400 28px/1.15 Georgia,serif;margin-top:4px}.sc span{display:block;font-size:12px;color:var(--muted);line-height:1.4}.sc h3{font-size:14px;margin:4px 0 0}
+.mini{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.mini h3{font-size:14px;margin:6px 0 2px}.mini p{font-size:12px;color:var(--muted);margin:0;line-height:1.4}
+.mini .ln{stroke-width:2.2}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:14px}.chips span{background:#f2f2f2;padding:4px 10px;font-size:12px}
+.src{margin-top:34px;padding-top:12px;border-top:1px solid var(--line);font-size:12px;color:var(--muted)}
+@media (max-width:560px){.hero{grid-template-columns:1fr}.hero svg{max-width:300px;margin:0 auto}.sc,.mini{grid-template-columns:1fr}.rw{grid-template-columns:minmax(100px,38%) 1fr}}
+@media (prefers-reduced-motion:reduce){.nd,.bar,.wb{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Indicador de Seguimiento a la Economía (ISE)</h1>
+  <p class="sub">Agosto de 2026 · cifras preliminares del DANE, publicadas el 19 de octubre de 2026.</p>
+  <div id="app"></div>
+  <div class="src">Fuente: DANE, ISE, boletín técnico de agosto de 2026. «pr» preliminar; «p» provisional. Índice con base 2015 = 100.</div>
+</div>
+<script>
+(function(){
+var $=id=>document.getElementById(id),app=$("app");
+var f2=n=>(n<0?"−":"")+Math.abs(n).toFixed(2).replace(".",",");
+var MO=["ago","sep","oct","nov","dic"].map(m=>m+"-24").concat("ene feb mar abr may jun jul ago sep oct nov dic".split(" ").map(m=>m+"-25"),"ene feb mar abr may jun jul ago".split(" ").map(m=>m+"-26"));
+var OI=[123.96,120.58,124.07,127.94,138.99,116.48,117.99,123.98,120.29,124.08,123.08,130.33,127.31,125.43,127.93,131.02,140.03,117.54,119.54,128.92,124.16,129.39,127.30,131.70,127.27];
+var OA=[1.23,0.59,3.60,0.41,3.61,2.04,1.18,4.47,-0.15,2.14,3.50,4.94,2.71,4.02,3.11,2.41,0.75,0.91,1.31,3.98,3.22,4.28,3.43,1.06,-0.04];
+var OY=[1.35,1.26,1.50,1.39,1.60,2.04,1.61,2.58,1.88,1.94,2.20,2.61,2.62,2.78,2.81,2.77,2.58,0.91,1.11,2.11,2.39,2.78,2.89,2.61,2.27];
+var AI=[122.73,122.09,123.97,122.57,125.09,125.31,125.13,123.54,124.67,124.94,124.38,128.41,125.78,126.85,127.61,125.44,125.90,126.22,126.78,128.31,128.56,130.19,128.69,129.69,125.65];
+var AA=[1.35,0.78,3.64,0.52,3.63,1.96,2.65,2.68,1.24,1.95,3.49,4.77,2.49,3.90,2.93,2.33,0.65,0.72,1.32,3.86,3.12,4.20,3.46,0.99,-0.11];
+var AM=[0.13,-0.52,1.53,-1.12,2.05,0.18,-0.15,-1.27,0.92,0.21,-0.44,3.24,-2.05,0.85,0.60,-1.70,0.37,0.25,0.45,1.20,0.20,1.27,-1.15,0.77,-3.11];
+var TI=[121.90,122.31,122.87,123.46,123.94,124.24,124.40,124.50,124.65,124.94,125.38,125.89,126.27,126.43,126.37,126.27,126.29,126.54,127.02,127.64,128.24,128.67,128.83,128.74,128.53];
+var TM=[0.21,0.34,0.46,0.48,0.39,0.25,0.13,0.08,0.12,0.23,0.35,0.40,0.31,0.12,-0.04,-0.08,0.01,0.20,0.38,0.49,0.47,0.34,0.12,-0.07,-0.16];
+var GM={
+ ao:{l:"Anual · original",v:-0.04,p:2.71,pl:"agosto de 2025",a:[-2,6],t:"El ISE (serie original) se ubicó en 127,27, frente a 127,31 en agosto de 2025."},
+ aa:{l:"Anual · ajustada",v:-0.11,p:2.49,pl:"agosto de 2025",a:[-2,6],t:"La serie ajustada por efecto estacional y calendario se ubicó en 125,65, frente a 125,78 en agosto de 2025."},
+ am:{l:"Mensual · ajustada",v:-3.11,p:-2.05,pl:"agosto de 2025",a:[-4,4],t:"Frente a julio de 2026 (129,69), el índice ajustado cayó a 125,65."},
+ yo:{l:"Año corrido · original",v:2.27,p:2.62,pl:"enero–agosto de 2025",a:[0,4],t:"Entre enero y agosto de 2026 el ISE creció 2,27 % frente al mismo período de 2025."}
+};
+var EV={
+ a:{l:"Variación anual",s:[["o","Original","#111111",OA],["j","Ajustada","#d0021b",AA]],n:"Crecimiento frente al mismo mes del año anterior (%)."},
+ m:{l:"Variación mensual",s:[["j","Ajustada","#d0021b",AM],["t","Tendencia-ciclo","#8a8a8a",TM]],n:"Cambio frente al mes anterior (%). El boletín publica la tasa mensual solo para la serie ajustada y la de tendencia-ciclo."},
+ i:{l:"Índice",s:[["o","Original","#111111",OI],["j","Ajustada","#d0021b",AI],["t","Tendencia-ciclo","#8a8a8a",TI]],n:"Índice con base 2015 = 100. La serie original conserva los efectos estacionales, por eso sube en diciembre."},
+ y:{l:"Año corrido",s:[["o","Original","#111111",OY]],n:"Crecimiento acumulado desde enero frente al mismo período del año anterior (%)."}
+};
+var SEC=[
+["Agricultura, ganadería y minería","Agricultura, ganadería, caza, silvicultura y pesca; explotación de minas y canteras",-3.19,-0.45,"Prim."],
+["Industria y construcción","Industrias manufactureras y construcción",-3.03,-0.39,"Secund."],
+["Electricidad, gas y agua","Suministro de electricidad, gas, vapor y aire acondicionado; distribución de agua; evacuación y tratamiento de aguas residuales, gestión de desechos y saneamiento ambiental",4.74,0.22,"Electr."],
+["Comercio, transporte y alojamiento","Comercio al por mayor y al por menor; reparación de vehículos automotores y motocicletas; transporte y almacenamiento; alojamiento y servicios de comida",-0.95,-0.20,"Comercio"],
+["Información y comunicaciones","Información y comunicaciones",-1.87,-0.04,"Inform."],
+["Financieras y de seguros","Actividades financieras y de seguros",0.82,0.04,"Finanzas"],
+["Inmobiliarias","Actividades inmobiliarias",1.87,0.15,"Inmob."],
+["Profesionales y servicios de apoyo","Actividades profesionales, científicas y técnicas; servicios administrativos y de apoyo",1.02,0.06,"Profes."],
+["Administración pública, educación y salud","Administración pública y defensa; seguridad social; educación; salud y servicios sociales; actividades artísticas, de entretenimiento y otros servicios; hogares como empleadores",2.25,0.57,"Adm. púb."]
+].map(x=>({n:x[0],d:x[1],g:x[2],c:x[3],s:x[4]}));
+var RV=[["Enero",0.92,0.91],["Febrero",1.30,1.31],["Marzo",3.98,3.98],["Abril",3.23,3.22],["Mayo",4.29,4.28],["Junio",3.41,3.43],["Julio",1.11,1.06]];
+var S={tab:"r",gm:"ao",em:"a",vv:{o:1,j:1,t:1},sv:"rk",sm:"c",sel:8},CH={};
+var pill=(a,v,l,on,c)=>'<button class="pill" data-a="'+a+'" data-v="'+v+'" aria-pressed="'+on+'">'+(c?'<i style="background:'+c+'"></i>':"")+l+"</button>";
+var tab=(v,l)=>'<button class="tab" data-a="tab" data-v="'+v+'" aria-pressed="'+(S.tab===v)+'">'+l+"</button>";
+function cu(){
+  document.querySelectorAll(".cu").forEach(el=>{
+    var n=+el.dataset.n,d=+el.dataset.d,fm=v=>(v<0?"−":"")+Math.abs(v).toFixed(d).replace(".",","),t0=null;
+    if(matchMedia("(prefers-reduced-motion:reduce)").matches){el.textContent=fm(n);return}
+    (function s(t){if(t0===null)t0=t;var k=Math.min(1,(t-t0)/1300);el.textContent=fm(n*(1-Math.pow(1-k,3)));if(k<1)requestAnimationFrame(s)})(performance.now());
+  });
+}
+/* ---------- Resumen ---------- */
+function resumen(){
+  var g=GM[S.gm],mn=g.a[0],mx=g.a[1],fr=v=>Math.max(0,Math.min(1,(v-mn)/(mx-mn))),R=112;
+  var pt=(q,r)=>{var a=Math.PI*(1-q);return[(150+r*Math.cos(a)).toFixed(1),(150-r*Math.sin(a)).toFixed(1)]};
+  var arc=(a,b,c)=>{var p=pt(a,R),q=pt(b,R);return b>a?'<path class="arc" d="M'+p.join(" ")+"A"+R+" "+R+" 0 0 1 "+q.join(" ")+'" stroke="'+c+'"/>':""};
+  var z=fr(0),pp=pt(fr(g.p),R),lab=(q,t,al)=>{var p=pt(q,R+16);return '<text class="gl" x="'+p[0]+'" y="'+(+p[1]+4)+'" text-anchor="'+al+'">'+t+"</text>"};
+  var s='<svg viewBox="0 0 300 184" role="img" aria-label="Medidor de crecimiento: '+g.l+' '+f2(g.v)+' %">'+arc(0,z,"#f3b9bf")+arc(z,1,"#e6e6e6")+
+   '<line x1="'+pt(z,R-12)[0]+'" y1="'+pt(z,R-12)[1]+'" x2="'+pt(z,R+12)[0]+'" y2="'+pt(z,R+12)[1]+'" stroke="#111" stroke-width="2"/>'+
+   lab(0,mn,"end")+lab(1,mx,"start")+(z>0&&z<1?lab(z,"0","middle"):"")+
+   '<circle cx="'+pp[0]+'" cy="'+pp[1]+'" r="6" fill="#fff" stroke="#111" stroke-width="2"/><g class="nd" id="nd" style="transform:rotate(-90deg)"><path d="M150 150L150 46" stroke="#d0021b" stroke-width="3.5" stroke-linecap="round"/><circle cx="150" cy="150" r="9" fill="#111"/></g></svg>';
+  var d=g.v-g.p,h='<div class="hero"><div>'+s+'</div><div><div class="ctl" style="margin-bottom:6px"><div class="grp">'+Object.keys(GM).map(k=>pill("gm",k,GM[k].l,S.gm===k)).join("")+"</div></div>";
+  h+='<div class="big"><span class="cu" data-n="'+g.v+'" data-d="2">0</span><small> %</small></div><p style="margin:0 0 8px;font-size:15px">'+g.t+'</p><p class="pv"><svg width="12" height="12" viewBox="0 0 12 12" style="display:inline;vertical-align:-1px"><circle cx="6" cy="6" r="4.5" fill="#fff" stroke="#111" stroke-width="2"/></svg> Un año antes ('+g.pl+'): <b>'+f2(g.p)+' %</b> · diferencia: <b>'+(d>0?"+":"")+f2(d)+" pp</b></p></div></div>";
+  h+='<p class="note">La aguja marca el dato de agosto de 2026; el círculo, el del año anterior. La zona rosada es crecimiento negativo. El DANE reporta un decrecimiento de 0,04 % en la serie original: prácticamente sin variación frente a agosto de 2025.</p>';
+  return h;
+}
+function needle(){
+  var g=GM[S.gm],q=Math.max(0,Math.min(1,(g.v-g.a[0])/(g.a[1]-g.a[0]))),n=$("nd");
+  requestAnimationFrame(()=>requestAnimationFrame(()=>{if(n)n.style.transform="rotate("+((q-.5)*180)+"deg)"}));
+}
+/* ---------- Evolución ---------- */
+function sm(q){
+  var d="M"+q[0][0].toFixed(1)+","+q[0][1].toFixed(1);
+  for(var i=0;i<q.length-1;i++){var a=q[i-1]||q[i],b=q[i],c=q[i+1],e=q[i+2]||c;
+    d+="C"+[b[0]+(c[0]-a[0])/6,b[1]+(c[1]-a[1])/6,c[0]-(e[0]-b[0])/6,c[1]-(e[1]-b[1])/6,c[0],c[1]].map(n=>n.toFixed(1)).join(",")}
+  return d;
+}
+function chart(K){
+  var N=MO.length,L=46,T=12,pw=450,ph=250,vis=K.s.filter(s=>S.vv[s[0]]);if(!vis.length)vis=K.s;
+  var all=[].concat.apply([],K.s.map(s=>s[3])),mn=Math.min.apply(0,all),mx=Math.max.apply(0,all),sp=mx-mn,st=sp>20?5:sp>5.5?1:sp>3?.5:.25;
+  var lo=Math.floor(mn/st)*st,hi=Math.ceil(mx/st)*st,xs=i=>L+i*pw/(N-1),ys=v=>T+ph-(v-lo)/(hi-lo)*ph,g="";
+  CH={K:K,N:N,xs:xs,ys:ys,L:L,pw:pw,vis:vis};
+  for(var t=lo;t<=hi+1e-9;t+=st){var tt=st<1?t.toFixed(2).replace(".",","):String(Math.round(t)).replace("-","−");g+='<line x1="'+L+'" x2="'+(L+pw)+'" y1="'+ys(t)+'" y2="'+ys(t)+'" stroke="'+(Math.abs(t)<1e-9?"#111":"#e8e8e8")+'"/><text class="tk" x="'+(L-6)+'" y="'+(ys(t)+3)+'" text-anchor="end">'+tt+"</text>"}
+  MO.forEach((m,i)=>{if(i%3===0)g+='<text class="tk" x="'+xs(i)+'" y="282" text-anchor="middle">'+m+"</text>"});
+  vis.forEach(s=>{g+='<path class="ln" data-k="'+s[0]+'" stroke="'+s[2]+'" d="'+sm(s[3].map((v,i)=>[xs(i),ys(v)]))+'"/>'});
+  var lb=vis.map(s=>({s:s,y:ys(s[3][N-1])})).sort((a,b)=>a.y-b.y);
+  for(var j=1;j<lb.length;j++)if(lb[j].y-lb[j-1].y<15)lb[j].y=lb[j-1].y+15;
+  lb.forEach(o=>{g+='<circle cx="'+xs(N-1)+'" cy="'+ys(o.s[3][N-1])+'" r="4.5" fill="'+o.s[2]+'"/><text x="'+(xs(N-1)+10)+'" y="'+(o.y+4)+'" font-size="12" font-weight="700" fill="'+(o.s[0]==="t"?"#6b6b6b":o.s[2])+'">'+o.s[1]+"</text>"});
+  g+='<g id="cur" style="display:none"><line id="cl" y1="'+T+'" y2="'+(T+ph)+'" stroke="#111" stroke-dasharray="3 3"/>'+K.s.map(s=>'<circle id="c_'+s[0]+'" r="5" fill="'+s[2]+'" stroke="#fff" stroke-width="2"/>').join("")+'</g><rect id="hit" x="'+L+'" y="'+T+'" width="'+pw+'" height="'+ph+'" fill="transparent"/>';
+  return '<div class="chart"><svg id="sv" viewBox="0 0 640 290" role="img" aria-label="'+K.l+' del ISE">'+g+'</svg><div class="tip" id="tip"></div></div>';
+}
+function cur(i){
+  var x=CH.xs(i),h="<b>"+MO[i]+"</b>",idx=CH.K.l==="Índice";
+  $("cur").style.display="";$("cl").setAttribute("x1",x);$("cl").setAttribute("x2",x);
+  CH.K.s.forEach(s=>{var c=$("c_"+s[0]);if(CH.vis.indexOf(s)>-1){var v=s[3][i];c.style.display="";c.setAttribute("cx",x);c.setAttribute("cy",CH.ys(v));h+='<br><i style="background:'+s[2]+'"></i>'+s[1]+": "+f2(v)+(idx?"":" %")}else c.style.display="none"});
+  var t=$("tip"),w=$("sv").clientWidth;t.innerHTML=h;t.classList.add("on");
+  t.style.left=Math.max(0,Math.min(w-t.offsetWidth,x/640*w+12))+"px";
+}
+function bindChart(){
+  var sv=$("sv");
+  function mv(e){var r=sv.getBoundingClientRect(),x=(e.clientX-r.left)/r.width*640;cur(Math.max(0,Math.min(CH.N-1,Math.round((x-CH.L)/CH.pw*(CH.N-1)))))}
+  sv.addEventListener("pointermove",mv);sv.addEventListener("pointerdown",mv);
+  sv.addEventListener("pointerleave",()=>{$("cur").style.display="none";$("tip").classList.remove("on")});
+}
+function drawIn(){
+  if(matchMedia("(prefers-reduced-motion:reduce)").matches)return;
+  document.querySelectorAll(".chart .ln").forEach((p,k)=>{var l=p.getTotalLength();p.style.strokeDasharray=l;p.style.strokeDashoffset=l;p.getBoundingClientRect();p.style.transition="stroke-dashoffset 1.4s cubic-bezier(.3,.7,.2,1) "+(k*.15)+"s";p.style.strokeDashoffset=0});
+}
+function evol(){
+  var K=EV[S.em];
+  var h='<div class="ctl"><div class="grp">'+Object.keys(EV).map(k=>pill("em",k,EV[k].l,S.em===k)).join("")+"</div>"+(K.s.length>1?'<div class="grp"><small>Series</small>'+K.s.map(s=>pill("vv",s[0],s[1],!!S.vv[s[0]],s[2])).join("")+"</div>":"")+"</div>";
+  return h+chart(K)+'<p class="note">'+K.n+" Pasa el cursor o desliza el dedo sobre la gráfica. Datos de agosto de 2024 (p) a agosto de 2026 (pr).</p>";
+}
+/* ---------- Sectores ---------- */
+var SI={p:'<path d="M12 21V11M12 11C12 7 9 5 5 5c0 4 3 6 7 6zM12 14c0-3 2-5 6-5 0 3-2 5-6 5z"/>',s:'<path d="M3 21V10l6 3V10l6 3V6h4v15zM7 17h2M12 17h2M16 17h2"/>',t:'<path d="M4 21V9l8-5 8 5v12zM9 21v-6h6v6M9 11h.01M15 11h.01"/>'};
+function sector(){
+  var cards=[["p","Primarias","Agricultura y minería",-3.19,-3.10,-2.06,"106,94 frente a 110,47"],["s","Secundarias","Industria y construcción",-3.03,-3.02,-4.17,"98,53 frente a 101,62"],["t","Terciarias","Servicios, comercio y otros",1.10,1.35,-1.39,"140,32 frente a 138,80"]];
+  var h='<div class="sc">'+cards.map(c=>'<div><svg class="ic" viewBox="0 0 24 24">'+SI[c[0]]+"</svg><h3>"+c[1]+'</h3><span>'+c[2]+'</span><b><span class="cu" data-n="'+c[3]+'" data-d="2" style="display:inline;font-size:inherit;color:inherit">0</span> %</b><span>Anual, serie original · ajustada: '+f2(c[4])+' % · mensual ajustada: '+f2(c[5])+" %</span><span>Índice agosto 2026 (original): "+c[6]+"</span></div>").join("")+"</div>";
+  var x=SEC[S.sel];
+  h+='<div class="card" id="card" role="status"></div>';
+  h+='<div class="ctl"><div class="grp">'+pill("sv","rk","Ranking",S.sv==="rk")+pill("sv","wf","Cascada",S.sv==="wf")+"</div>"+(S.sv==="rk"?'<div class="grp"><small>Mostrar</small>'+pill("sm","c","Contribución (pp)",S.sm==="c")+pill("sm","g","Crecimiento anual (%)",S.sm==="g")+"</div>":"")+"</div>";
+  h+=S.sv==="rk"?rank():waterfall();
+  h+='<p class="note">'+(S.sv==="rk"?"Contribución: cuántos puntos porcentuales aporta cada agrupación a la variación anual del ISE (−0,04 %). Por redondeo, la suma puede no coincidir exactamente.":"Cada barra suma o resta a la anterior hasta llegar a la variación total del ISE: −0,04 puntos porcentuales.")+" Tasas calculadas con la serie original, agosto de 2026 frente a agosto de 2025.</p>";
+  return h;
+}
+function showCard(i){
+  var x=SEC[i],c=$("card");if(!c)return;
+  c.innerHTML='<div class="n">'+x.n+'</div><b>'+f2(x.c)+' pp</b><b>'+f2(x.g)+' %</b><span><br>Contribución a la variación anual · crecimiento anual. '+x.d+".</span>";
+}
+function rank(){
+  var c=S.sm==="c",mn=c?-0.7:-4.2,mx=c?0.9:5.8,P=v=>(v-mn)/(mx-mn)*100;
+  var L=SEC.map((x,i)=>({x:x,i:i,v:c?x.c:x.g})).sort((a,b)=>b.v-a.v);
+  return '<div id="plot">'+L.map(o=>'<button class="rw'+(o.i===S.sel?" on":"")+'" data-a="sel" data-v="'+o.i+'"><span class="lb">'+o.x.n+'</span><span class="tr"><i class="z" style="left:'+P(0)+'%"></i><span class="bar'+(o.v<0?" q":"")+'" style="left:'+P(Math.min(0,o.v))+"%;width:"+Math.abs(o.v)/(mx-mn)*100+'%"></span><span class="v" style="left:'+(P(Math.max(0,o.v))+1)+'%">'+f2(o.v)+"</span></span></button>").join("")+"</div>";
+}
+function waterfall(){
+  var T=26,ph=210,mx=0.2,mn=-1.0,ys=v=>T+(mx-v)/(mx-mn)*ph,cum=0,g='<line x1="10" x2="630" y1="'+ys(0)+'" y2="'+ys(0)+'" stroke="#111"/>',n=SEC.length+1,W=620/n;
+  SEC.forEach((s,i)=>{
+    var a=cum,b=cum+s.c,x=12+i*W+W/2,y1=ys(Math.max(a,b)),y2=ys(Math.min(a,b));cum=b;
+    g+='<rect class="wb '+(s.c<0?"d":"u")+'" data-a="sel" data-v="'+i+'" x="'+(x-17)+'" y="'+y1+'" width="34" height="'+Math.max(2,y2-y1)+'" rx="2" fill="'+(i===S.sel?"#d0021b":s.c<0?"#111":"#e58a93")+'" style="animation-delay:'+i*.07+'s"/>'+(i<n-1?'<line x1="'+(x+17)+'" x2="'+(x+W-17)+'" y1="'+ys(b)+'" y2="'+ys(b)+'" stroke="#bbb" stroke-dasharray="3 3"/>':"")+
+     '<text class="tk" x="'+x+'" y="'+((s.c<0?y2+13:y1-5))+'" text-anchor="middle" style="fill:#111;font-weight:700">'+f2(s.c)+'</text><text class="tk" x="'+x+'" y="262" text-anchor="middle">'+s.s+"</text>";
+  });
+  var x=12+(n-1)*W+W/2;
+  g+='<rect class="wb u" x="'+(x-17)+'" y="'+ys(0)+'" width="34" height="'+Math.max(3,ys(cum)-ys(0))+'" fill="#d0021b" style="animation-delay:.7s"/><text class="tk" x="'+x+'" y="'+(ys(cum)+14)+'" text-anchor="middle" style="fill:#d0021b;font-weight:700">'+f2(-0.04)+'</text><text class="tk" x="'+x+'" y="262" text-anchor="middle" style="font-weight:700">ISE</text>';
+  return '<svg viewBox="0 0 640 275" role="img" aria-label="Cascada de contribuciones al crecimiento anual del ISE">'+g+"</svg>";
+}
+/* ---------- Cifras y método ---------- */
+function mini(a,c,tt,tx){
+  var mn=Math.min.apply(0,a),mx=Math.max.apply(0,a),pts=a.map((v,i)=>[6+i*188/(a.length-1),80-(v-mn)/(mx-mn)*66]);
+  return '<div><svg viewBox="0 0 200 90" role="img" aria-label="'+tt+'"><path class="ln" stroke="'+c+'" d="'+sm(pts)+'"/></svg><h3>'+tt+"</h3><p>"+tx+"</p></div>";
+}
+function metodo(){
+  var h='<h2 style="margin-top:6px">Tres series, tres lecturas</h2><div class="mini">'+mini(OI,"#111","Original","Conserva los efectos estacionales y de calendario; por eso hay picos cada diciembre.")+mini(AI,"#d0021b","Ajustada","Sin efectos estacionales ni de calendario: permite comparar meses sucesivos.")+mini(TI,"#8a8a8a","Tendencia-ciclo","Suaviza el ruido para leer períodos de mediano plazo, de un año o más.")+"</div>";
+  h+='<p class="note">Las tres líneas son el índice (base 2015 = 100) de agosto de 2024 a agosto de 2026.</p>';
+  h+='<h2>Revisiones de enero a julio de 2026</h2><p class="note" style="margin:0 0 10px">Crecimiento anual de la serie original. Publicado el 18 de septiembre; revisado el 19 de octubre de 2026.</p><div id="plot">';
+  var P=v=>(v+0.08)/0.16*100;
+  h+=RV.map(r=>{var d=Math.round((r[2]-r[1])*100)/100;return '<div class="rw"><span class="lb">'+r[0]+" · "+f2(r[1])+" → <b>"+f2(r[2])+'</b></span><span class="tr"><i class="z" style="left:50%"></i><span class="bar'+(d<0?" q":"")+'" style="left:'+P(Math.min(0,d))+"%;width:"+Math.abs(d)/0.16*100+'%"></span><span class="v" style="left:'+(P(Math.max(0,d))+1)+'%">'+(d>0?"+":"")+f2(d)+" pp</span></span></div>"}).join("")+"</div>";
+  h+='<p class="note">La mayor revisión fue la de julio: de 1,11 % a 1,06 %. El ISE se actualiza con tres ciclos de datos (mensual, trimestral con el PIB y revisiones mayores) y el ajuste estacional es «concurrente»: se reestima con cada dato nuevo.</p><div class="chips"><span>Base 2015 = 100</span><span>Cobertura nacional</span><span>Periodicidad mensual</span><span>Cifras preliminares (pr) y provisionales (p)</span></div>';
+  return h;
+}
+function render(){
+  CH={};
+  app.innerHTML='<div class="tabs">'+tab("r","Resumen")+tab("e","Evolución")+tab("s","Sectores")+tab("m","Cifras y método")+"</div>"+({r:resumen,e:evol,s:sector,m:metodo})[S.tab]();
+  if(S.tab==="r"){needle();cu()}
+  if(S.tab==="e"){bindChart();drawIn()}
+  if(S.tab==="s"){showCard(S.sel);cu()}
+  var p=$("plot");if(p)requestAnimationFrame(()=>requestAnimationFrame(()=>p.classList.add("go")));
+}
+app.addEventListener("click",e=>{
+  var b=e.target.closest("[data-a]");if(!b)return;
+  var a=b.dataset.a,v=b.dataset.v;
+  if(a==="vv"){var n=Object.keys(S.vv).filter(k=>S.vv[k]&&EV[S.em].s.some(s=>s[0]===k)).length;if(S.vv[v]&&n===1)return;S.vv[v]=S.vv[v]?0:1}
+  else if(a==="sel")S.sel=+v;
+  else S[a]=v;
+  render();
+});
+app.addEventListener("mouseover",e=>{var b=e.target.closest('[data-a="sel"]');if(b)showCard(+b.dataset.v)});
+app.addEventListener("mouseleave",()=>{if(S.tab==="s")showCard(S.sel)});
+render();
+})();
+</script>
+</body>
+</html>
