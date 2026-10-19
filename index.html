@@ -55,12 +55,8 @@ svg{display:block;width:100%;height:auto}
 .sc svg.ic{width:30px;height:30px;stroke:var(--ink);fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;transition:transform .3s}
 .sc div:hover .ic{transform:translateY(-3px) rotate(-4deg)}
 .sc b{display:block;font:400 28px/1.15 Georgia,serif;margin-top:4px}.sc span{display:block;font-size:12px;color:var(--muted);line-height:1.4}.sc h3{font-size:14px;margin:4px 0 0}
-.mini{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
-.mini h3{font-size:14px;margin:6px 0 2px}.mini p{font-size:12px;color:var(--muted);margin:0;line-height:1.4}
-.mini .ln{stroke-width:2.2}
-.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:14px}.chips span{background:#f2f2f2;padding:4px 10px;font-size:12px}
 .src{margin-top:34px;padding-top:12px;border-top:1px solid var(--line);font-size:12px;color:var(--muted)}
-@media (max-width:560px){.hero{grid-template-columns:1fr}.hero svg{max-width:300px;margin:0 auto}.sc,.mini{grid-template-columns:1fr}.rw{grid-template-columns:minmax(100px,38%) 1fr}}
+@media (max-width:560px){.hero{grid-template-columns:1fr}.hero svg{max-width:300px;margin:0 auto}.sc{grid-template-columns:1fr}.rw{grid-template-columns:minmax(100px,38%) 1fr}}
 @media (prefers-reduced-motion:reduce){.nd,.bar,.wb{transition:none!important;animation:none!important}}
 </style>
 </head>
@@ -107,7 +103,6 @@ var SEC=[
 ["Profesionales y servicios de apoyo","Actividades profesionales, científicas y técnicas; servicios administrativos y de apoyo",1.02,0.06,"Profes."],
 ["Administración pública, educación y salud","Administración pública y defensa; seguridad social; educación; salud y servicios sociales; actividades artísticas, de entretenimiento y otros servicios; hogares como empleadores",2.25,0.57,"Adm. púb."]
 ].map(x=>({n:x[0],d:x[1],g:x[2],c:x[3],s:x[4]}));
-var RV=[["Enero",0.92,0.91],["Febrero",1.30,1.31],["Marzo",3.98,3.98],["Abril",3.23,3.22],["Mayo",4.29,4.28],["Junio",3.41,3.43],["Julio",1.11,1.06]];
 var S={tab:"r",gm:"ao",em:"a",vv:{o:1,j:1,t:1},sv:"rk",sm:"c",sel:8},CH={};
 var pill=(a,v,l,on,c)=>'<button class="pill" data-a="'+a+'" data-v="'+v+'" aria-pressed="'+on+'">'+(c?'<i style="background:'+c+'"></i>':"")+l+"</button>";
 var tab=(v,l)=>'<button class="tab" data-a="tab" data-v="'+v+'" aria-pressed="'+(S.tab===v)+'">'+l+"</button>";
@@ -212,23 +207,9 @@ function waterfall(){
   g+='<rect class="wb u" x="'+(x-17)+'" y="'+ys(0)+'" width="34" height="'+Math.max(3,ys(cum)-ys(0))+'" fill="#d0021b" style="animation-delay:.7s"/><text class="tk" x="'+x+'" y="'+(ys(cum)+14)+'" text-anchor="middle" style="fill:#d0021b;font-weight:700">'+f2(-0.04)+'</text><text class="tk" x="'+x+'" y="262" text-anchor="middle" style="font-weight:700">ISE</text>';
   return '<svg viewBox="0 0 640 275" role="img" aria-label="Cascada de contribuciones al crecimiento anual del ISE">'+g+"</svg>";
 }
-/* ---------- Cifras y método ---------- */
-function mini(a,c,tt,tx){
-  var mn=Math.min.apply(0,a),mx=Math.max.apply(0,a),pts=a.map((v,i)=>[6+i*188/(a.length-1),80-(v-mn)/(mx-mn)*66]);
-  return '<div><svg viewBox="0 0 200 90" role="img" aria-label="'+tt+'"><path class="ln" stroke="'+c+'" d="'+sm(pts)+'"/></svg><h3>'+tt+"</h3><p>"+tx+"</p></div>";
-}
-function metodo(){
-  var h='<h2 style="margin-top:6px">Tres series, tres lecturas</h2><div class="mini">'+mini(OI,"#111","Original","Conserva los efectos estacionales y de calendario; por eso hay picos cada diciembre.")+mini(AI,"#d0021b","Ajustada","Sin efectos estacionales ni de calendario: permite comparar meses sucesivos.")+mini(TI,"#8a8a8a","Tendencia-ciclo","Suaviza el ruido para leer períodos de mediano plazo, de un año o más.")+"</div>";
-  h+='<p class="note">Las tres líneas son el índice (base 2015 = 100) de agosto de 2024 a agosto de 2026.</p>';
-  h+='<h2>Revisiones de enero a julio de 2026</h2><p class="note" style="margin:0 0 10px">Crecimiento anual de la serie original. Publicado el 18 de septiembre; revisado el 19 de octubre de 2026.</p><div id="plot">';
-  var P=v=>(v+0.08)/0.16*100;
-  h+=RV.map(r=>{var d=Math.round((r[2]-r[1])*100)/100;return '<div class="rw"><span class="lb">'+r[0]+" · "+f2(r[1])+" → <b>"+f2(r[2])+'</b></span><span class="tr"><i class="z" style="left:50%"></i><span class="bar'+(d<0?" q":"")+'" style="left:'+P(Math.min(0,d))+"%;width:"+Math.abs(d)/0.16*100+'%"></span><span class="v" style="left:'+(P(Math.max(0,d))+1)+'%">'+(d>0?"+":"")+f2(d)+" pp</span></span></div>"}).join("")+"</div>";
-  h+='<p class="note">La mayor revisión fue la de julio: de 1,11 % a 1,06 %. El ISE se actualiza con tres ciclos de datos (mensual, trimestral con el PIB y revisiones mayores) y el ajuste estacional es «concurrente»: se reestima con cada dato nuevo.</p><div class="chips"><span>Base 2015 = 100</span><span>Cobertura nacional</span><span>Periodicidad mensual</span><span>Cifras preliminares (pr) y provisionales (p)</span></div>';
-  return h;
-}
 function render(){
   CH={};
-  app.innerHTML='<div class="tabs">'+tab("r","Resumen")+tab("e","Evolución")+tab("s","Sectores")+tab("m","Cifras y método")+"</div>"+({r:resumen,e:evol,s:sector,m:metodo})[S.tab]();
+  app.innerHTML='<div class="tabs">'+tab("r","Resumen")+tab("e","Evolución")+tab("s","Sectores")+"</div>"+({r:resumen,e:evol,s:sector})[S.tab]();
   if(S.tab==="r"){needle();cu()}
   if(S.tab==="e"){bindChart();drawIn()}
   if(S.tab==="s"){showCard(S.sel);cu()}
